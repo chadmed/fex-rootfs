@@ -1,0 +1,31 @@
+#!/bin/bash
+set -euo pipefail
+
+deps=( /usr/share/fex-emu-rootfs-layers/gentoo/images/* )
+deps=( "${deps[@]/images/layers}" )
+units="$(systemd-escape "${deps[@]%.*}" --path --suffix mount)"
+
+image_layers=( $(ls /usr/share/fex-emu-rootfs-layers/gentoo/images/) )
+layers=( $(printf '%s\n' "${image_layers[@]%.*}" $(ls /usr/share/fex-emu-rootfs-layers/gentoo/layers/) | sort -r | uniq) )
+layers=( $(printf '/usr/share/fex-emu-rootfs-layers/gentoo/layers/%s\n' "${layers[@]}") )
+layers="$(IFS=: ; echo "${layers[*]}")"
+
+file="usr-share-fex\\x2demu-RootFS-Gentoo.mount"
+cat >"$1/${file}" <<EOF
+[Unit]
+Description=Fex rootfs
+BindsTo=${units}
+After=${units}
+
+[Mount]
+What=overlay
+Where=/usr/share/fex-emu/RootFS/Gentoo/
+Type=overlay
+Options=lowerdir=${layers},upperdir=/usr/share/fex-emu-rootfs-layers/gentoo/writable,workdir=/usr/share/fex-emu-rootfs-layers/gentoo/work
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+mkdir -p "$1/multi-user.target.wants/"
+ln -s "../${file}" "$1/multi-user.target.wants/${file}"
