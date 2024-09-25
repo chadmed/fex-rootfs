@@ -10,7 +10,7 @@ portage_confdir: /var/tmp/catalyst/config/stages
 portage_prefix: stage4
 binrepo_path: amd64/binpackages/23.0/x86-64
 stage4/fsscript: fsscript.sh
-stage4/packages: --with-bdeps=y sys-fs/fuse:0 sys-fs/fuse:3
+stage4/packages: --with-bdeps=y sys-fs/fuse:0 sys-fs/fuse:3 x11-libs/gtk+:2 x11-libs/gtk+:3
 	app-admin/sudo
 	app-emulation/wine-vanilla
 	dev-libs/nspr
