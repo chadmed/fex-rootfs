@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-release=20240909
+release=20240924
 wget "https://github.com/WhatAmISupposedToPutHere/fex-rootfs/releases/download/${release}/fex-rootfs.sqfs"
 wget "https://github.com/WhatAmISupposedToPutHere/fex-rootfs/releases/download/${release}/fex-chroot.sqfs"
 mkdir rootfs chroot layer1 layer2 work result
