@@ -103,7 +103,7 @@ jobs:
         shell: bash
     container:
       image: "ghcr.io/whatamisupposedtoputhere/fex-rootfs-catalyst:latest"
-      options: --user root --privileged --memory=10g
+      options: --user root --privileged
     steps:
       - name: Checkout
         uses: "actions/checkout@v4"
