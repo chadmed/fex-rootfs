@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-release=20240924-p1
+release=20241013
 wget "https://github.com/WhatAmISupposedToPutHere/fex-rootfs/releases/download/${release}/fex-rootfs.sqfs"
 wget "https://github.com/WhatAmISupposedToPutHere/fex-rootfs/releases/download/${release}/fex-chroot.sqfs"
 mkdir rootfs chroot layer1 layer2 work result
@@ -19,7 +19,7 @@ for dir in dev sys proc; do
     mount --rbind /$dir $dir
     mount --make-rslave $dir
 done
-chroot . /bin/bash /build_mesa_chr.sh 20240927
+chroot . /bin/bash /build_mesa_chr.sh 20241013
 cd ../
 umount -R result
 mount -t overlay overlay -olowerdir=layer1:chroot:rootfs,upperdir=layer2,workdir=work result
