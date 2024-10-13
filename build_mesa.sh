@@ -12,7 +12,7 @@ for dir in package.accept_keywords package.mask package.use profile/package.use.
 done
 cp build_mesa_chr.sh result/
 cd result
-echo 'VIDEO_CARDS=asahi' >>etc/portage/make.conf
+echo 'VIDEO_CARDS=asahi honeykrisp' >>etc/portage/make.conf
 echo 'media-libs/mesa arm64 ~arm64' >etc/portage/package.accept_keywords/mesa
 echo 'sys-kernel/asahi-sources-6.10.7_p2' >etc/portage/profile/package.provided/kernel
 for dir in dev sys proc; do
